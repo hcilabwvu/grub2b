@@ -1,1 +1,71 @@
-GDPR-2b
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>GDPR-2B</title>
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://antenna.io/demo/jquery-bar-rating/dist/themes/fontawesome-stars.css">
+		<link rel="stylesheet" href="https://antenna.io/demo/jquery-bar-rating/dist/themes/bars-pill.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<script src="https://antenna.io/demo/jquery-bar-rating/jquery.barrating.js"></script>
+	</head>
+	<body>
+		<form name="submit-to-google-sheet">
+			Rating
+			<br>
+			<select name="rating" id="rating">
+			  <option value="1">1</option>
+			  <option value="2">2</option>
+			  <option value="3">3</option>
+			  <option value="4">4</option>
+			  <option value="5">5</option>
+			</select>
+			<br>
+			What went wrong?
+			<br>
+			<select name="reason" id="reason"  size="6" multiple>
+			  <option value="1">Poor route</option>
+			  <option value="2">Too many pickups</option>
+			  <option value="3">Co-rider behavior</option>
+			  <option value="4">Navigation</option>
+			  <option value="5">Driving</option>
+			  <option value="6" selected>Other</option>
+			</select>
+			<br>
+			Review
+			<br>
+			<textarea name='review1'></textarea>
+			<br>
+			<button>Verify</button>
+			<div id="review_ok">
+				Thanks for your review, please click on the submit button.
+			</div>
+			<div id="review_change">
+				Thanks for your review, please write a second review in the textbox that is located below. Remember that the traffic, the GPS route, and the rates are not under the worker control, so please try to rewrite your review taking in account these considerations. Assume that the car was clean and the driver was respectful during the ride.
+			</div>
+			<br>
+			Revised Review
+			<br>
+			<textarea name="review2" placeholder="Revised Review"></textarea>
+			<br>
+			<button>Save</button>
+		</form>
+		<script type="text/javascript">
+			$(function() {
+			  $('#rating').barrating({
+			    theme: 'fontawesome-stars'
+			  });
+			});
+		</script>
+		<script>
+		  const scriptURL = 'https://script.google.com/macros/s/AKfycbzpQ5RgUo8YkP80fnn1zGu6FAGI-sAUz9hKP6Mb6KT3sFemDLKS/exec'
+		  const form = document.forms['submit-to-google-sheet']
+
+		  form.addEventListener('submit', e => {
+		    e.preventDefault()
+		    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+		      .then(response => console.log('Success!', response))
+		      .catch(error => console.error('Error!', error.message))
+		  })
+		</script>
+	</body>
+</html>
