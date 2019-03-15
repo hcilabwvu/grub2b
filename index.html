@@ -12,43 +12,48 @@
 		<form name="submit-to-google-sheet">
 			Rating
 			<br>
-			<select name="rating" id="rating">
+			<select onchange="checkStarChange()" name="rating" id="rating">
 			  <option value="1">1</option>
 			  <option value="2">2</option>
 			  <option value="3">3</option>
 			  <option value="4">4</option>
-			  <option value="5">5</option>
+			  <option value="5" selected>5</option>
 			</select>
 			<br>
-			What went wrong?
+			<div id="extraOptions" hidden>
+				What went wrong?
+				<br>
+				<select name="reason" id="reason"  size="6" multiple>
+				  <option value="1">Poor route</option>
+				  <option value="2">Too many pickups</option>
+				  <option value="3">Co-rider behavior</option>
+				  <option value="4">Navigation</option>
+				  <option value="5">Driving</option>
+				  <option value="6" selected>Other</option>
+				</select>
+			</div>
 			<br>
-			<select name="reason" id="reason"  size="6" multiple>
-			  <option value="1">Poor route</option>
-			  <option value="2">Too many pickups</option>
-			  <option value="3">Co-rider behavior</option>
-			  <option value="4">Navigation</option>
-			  <option value="5">Driving</option>
-			  <option value="6" selected>Other</option>
-			</select>
+			Review to the driver
 			<br>
-			Review
+			<textarea onkeyup="checkLength()" id="review1" name="review1" placeholder="Review to the driver"></textarea>
+			<div id="textLength">0 characters</div>
 			<br>
-			<textarea name='review1'></textarea>
-			<br>
-			<button>Verify</button>
-			<div id="review_ok">
+			<button id="verifyButton" onclick="verifyText()" disabled>Verify</button>
+			<div id="reviewOk" hidden>
 				Thanks for your review, please click on the submit button.
 			</div>
-			<div id="review_change">
+			<div id="reviewChange" hidden>
 				Thanks for your review, please write a second review in the textbox that is located below. Remember that the traffic, the GPS route, and the rates are not under the worker control, so please try to rewrite your review taking in account these considerations. Assume that the car was clean and the driver was respectful during the ride.
+				<br>
+				Revised Review
+				<br>
+				<textarea onkeyup="checkLength2()" id="review2" name="review2" placeholder="Revised Review"></textarea>
+				<div id="textLength2">0 characters</div>
 			</div>
 			<br>
-			Revised Review
-			<br>
-			<textarea name="review2" placeholder="Revised Review"></textarea>
-			<br>
-			<button>Save</button>
+			<button id="submitButton" type="submit" disabled>Submit</button>
 		</form>
+
 		<script type="text/javascript">
 			$(function() {
 			  $('#rating').barrating({
@@ -56,7 +61,52 @@
 			  });
 			});
 		</script>
+
 		<script>
+		  function checkStarChange() {
+		  	var starValue = parseInt($('#rating').val());
+		  	if (starValue < 5) {
+		  		$('#extraOptions').show();
+		  	} else {
+		  		$('#extraOptions').hide();
+		  	}
+		  }
+
+		  function checkReview() {
+		  	return false;
+		  }
+
+		  function verifyText() {
+		  	var isValid = checkReview();
+		  	if (isValid) {
+		  		$('#reviewOk').show();
+		  		$('#submitButton').prop('disabled', false);
+		  	} else {
+		  		$('#review1').prop('disabled', true);
+		  		$('#reviewChange').show();
+		  	}
+		  }
+
+		  function checkLength() {
+		  	var reviewLength = $('#review1').val().length;
+		  	$('#textLength').text(reviewLength + ' characters');
+		  	if (reviewLength >= 200) {
+		  		$('#verifyButton').prop('disabled', false);
+		  	} else {
+		  		$('#verifyButton').prop('disabled', true);
+		  	}
+		  }
+
+		  function checkLength2() {
+		  	var reviewLength = $('#review2').val().length;
+		  	$('#textLength2').text(reviewLength + ' characters');
+		  	if (reviewLength >= 200) {
+		  		$('#submitButton').prop('disabled', false);
+		  	} else {
+		  		$('#submitButton').prop('disabled', true);
+		  	}
+		  }
+
 		  const scriptURL = 'https://script.google.com/macros/s/AKfycbzpQ5RgUo8YkP80fnn1zGu6FAGI-sAUz9hKP6Mb6KT3sFemDLKS/exec'
 		  const form = document.forms['submit-to-google-sheet']
 
