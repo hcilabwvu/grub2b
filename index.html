@@ -10,6 +10,9 @@
 	</head>
 	<body>
 		<form name="submit-to-google-sheet">
+			<input name="study" type="hidden" value='2B'>
+			<input name="score1" id="score1" type="hidden" value='0'>
+	  		<input name="score2" id="score2" type="hidden" value='0'>
 		    E-mail
 	  		<br>
 	  		<input name="email" type="email" placeholder="E-mail" required>
@@ -42,7 +45,7 @@
 			<textarea onkeyup="checkLength()" id="review1" name="review1" placeholder="Review to the driver"></textarea>
 			<div id="textLength">0 characters</div>
 			<br>
-			<button id="verifyButton" onclick="verifyText()" disabled>Verify</button>
+			<button type="button" id="verifyButton" onclick="verifyText()" disabled>Verify</button>
 			<div id="reviewOk" hidden>
 				Thanks for your review, please click on the submit button.
 			</div>
