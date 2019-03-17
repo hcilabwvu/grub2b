@@ -10,7 +10,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 </head>
 <body>
-	<form method="GET" action="https://script.google.com/macros/s/AKfycbzpQ5RgUo8YkP80fnn1zGu6FAGI-sAUz9hKP6Mb6KT3sFemDLKS/exec">
+	<form name="submit-to-google-sheet">
 	  <input name="action" type="hidden" value='test'>
 	  <input name="field" type="hidden" value='email'>
 	  <input name="retrieve" type="hidden" value='study'>
@@ -20,6 +20,23 @@
 	  <input name="value" type="email" placeholder="E-mail" required>
 	  <br>
 	  <input type="submit" id="submitButton" value="Submit">
+	  <div id="confirmation" hidden></div>
 	</form>
+
+	<script>
+	  const scriptURL = 'https://script.google.com/macros/s/AKfycbzpQ5RgUo8YkP80fnn1zGu6FAGI-sAUz9hKP6Mb6KT3sFemDLKS/exec';
+	  const form = document.forms['submit-to-google-sheet'];
+
+	  form.addEventListener('submit', e => {
+	    e.preventDefault();
+	    const queryString = new URLSearchParams(new FormData(form)).toString();
+	    console.log(queryString);
+	    $.get(scriptURL + '?' + queryString, data => {
+	      	console.log('Data', data)
+  	      	$('#confirmation').prop('hidden', false);
+	      	$('#confirmation').text(JSON.stringify(data));
+	    })
+	  })
+	</script>
 </body>
 </html>
