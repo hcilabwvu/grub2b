@@ -90,7 +90,8 @@
 		  		$('#reviewOk').show();
 		  		$('#submitButton').prop('disabled', false);
 		  	} else {
-		  		$('#review1').prop('disabled', true);
+		  		$('#verifyButton').prop('hidden', true);
+	  			$('#review1').prop('hidden', true);
 		  		$('#reviewChange').show();
 		  	}
 		  }
@@ -98,7 +99,7 @@
 		  function checkLength() {
 		  	var reviewLength = $('#review1').val().length;
 		  	$('#textLength').text(reviewLength + ' characters');
-		  	if (reviewLength >= 200) {
+		  	if (reviewLength >= 150) {
 		  		$('#verifyButton').prop('disabled', false);
 		  	} else {
 		  		$('#verifyButton').prop('disabled', true);
@@ -108,7 +109,7 @@
 		  function checkLength2() {
 		  	var reviewLength = $('#review2').val().length;
 		  	$('#textLength2').text(reviewLength + ' characters');
-		  	if (reviewLength >= 200) {
+		  	if (reviewLength >= 150) {
 		  		$('#submitButton').prop('disabled', false);
 		  	} else {
 		  		$('#submitButton').prop('disabled', true);
