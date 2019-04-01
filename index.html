@@ -8,13 +8,18 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 		<script src="https://antenna.io/demo/jquery-bar-rating/jquery.barrating.js"></script>
 		<link rel="stylesheet" href="https://hcilab.ml/files/index.css">
+		<style>
+			body {
+				font-size: 24px;
+			}
+		</style>
 	</head>
 	<body>
 		<form name="submit-to-google-sheet">
 			<input name="study" type="hidden" value='2B'>
 			<input name="score1" id="score1" type="hidden" value='0'>
 	  		<input name="score2" id="score2" type="hidden" value='0'>
-	  		<input name="email" type="email" type="hidden">
+	  		<input name="email" id="email" type="hidden">
 			<br>
 			Was the delivery person professional and courteous?
 	  		<br>
