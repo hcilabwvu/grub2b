@@ -14,11 +14,17 @@
 			<input name="study" type="hidden" value='2B'>
 			<input name="score1" id="score1" type="hidden" value='0'>
 	  		<input name="score2" id="score2" type="hidden" value='0'>
-		    E-mail
+	  		<input name="email" type="email" type="hidden">
+			<br>
+			Was the delivery person professional and courteous?
 	  		<br>
-	  		<input name="email" type="email" placeholder="E-mail" required>
+			Yes <input type="radio"> No <input type="radio">
+			<br>
+			Was your delivery on time?
 	  		<br>
-			Rating
+			Yes <input type="radio"> No <input type="radio">
+			<br>
+			Rate your overall experience
 			<br>
 			<select onchange="checkStarChange()" name="rating" id="rating">
 			  <option value="1" selected>1</option>
@@ -27,19 +33,6 @@
 			  <option value="4">4</option>
 			  <option value="5">5</option>
 			</select>
-			<br>
-			<div id="extraOptions" hidden>
-				What went wrong?
-				<br>
-				<select name="reason" id="reason"  size="6" multiple>
-				  <option value="1">Poor route</option>
-				  <option value="2">Too many pickups</option>
-				  <option value="3">Co-rider behavior</option>
-				  <option value="4">Navigation</option>
-				  <option value="5">Driving</option>
-				  <option value="6" selected>Other</option>
-				</select>
-			</div>
 			<br>
 			Review to the driver
 			<br>
@@ -51,7 +44,7 @@
 				Thanks for your review, please click on the submit button.
 			</div>
 			<div id="reviewChange" hidden>
-				Thanks for your review, please write a second review in the textbox that is located below. Remember that the traffic, the GPS route, and the rates are not under the worker control, so please try to rewrite your review taking in account these considerations. Assume that the car was clean and the driver was respectful during the ride.
+				Please write a second review about the delivery person. Remember that the traffic, the rates, and the restaurant orders (ingredients used etc) are not under the the delivery person's  control, so please try to rewrite your review taking in account these considerations. Assume also that the order was on time and the the delivery person was respectful.
 				<br>
 				Revised Review
 				<br>
