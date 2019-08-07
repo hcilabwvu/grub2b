@@ -1,0 +1,134 @@
+<html><head>
+		<title>GDPR-2B</title>
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/themes/fontawesome-stars.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/themes/bars-pill.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/jquery.barrating.min.js"></script>
+		<link rel="stylesheet" href="https://hcilab.ml/files/index.css">
+	</head>
+	<body>
+		<form name="submit-to-google-sheet">
+			<input name="study" type="hidden" value="2B">
+			<input name="score1" id="score1" type="hidden" value="0">
+	  		<input name="score2" id="score2" type="hidden" value="0">
+		    E-mail
+	  		<br>
+	  		<input name="email" type="email" placeholder="E-mail" required="">
+	  		<br>
+			Rating
+			<br>
+			<select onchange="checkStarChange()" name="rating" id="rating">
+			  <option value="1" selected="">1</option>
+			  <option value="2">2</option>
+			  <option value="3">3</option>
+			  <option value="4">4</option>
+			  <option value="5">5</option>
+			</select>
+			<br>
+			<div id="extraOptions" hidden="" style="display: block;">
+				What went wrong?
+				<br>
+				<select name="reason" id="reason" size="6" multiple="">
+				  <option value="1">Poor route</option>
+				  <option value="2">Too many pickups</option>
+				  <option value="3">Co-rider behavior</option>
+				  <option value="4">Navigation</option>
+				  <option value="5">Driving</option>
+				  <option value="6" selected="">Other</option>
+				</select>
+			</div>
+			<br>
+			Review to the driver
+			<br>
+			<textarea onkeyup="checkLength()" id="review1" name="review1" placeholder="Review to the driver"></textarea>
+			<div id="textLength">0 characters</div>
+			<br>
+			<input type="button" value="Validate" id="verifyButton" onclick="verifyText()" disabled="">
+			<div id="reviewOk" hidden="">
+				Thanks for your review, please click on the submit button.
+			</div>
+			<div id="reviewChange" hidden="">
+				Thanks for your review, please write a second review in the textbox that is located below. Remember that the traffic, the GPS route, and the rates are not under the worker control, so please try to rewrite your review taking in account these considerations. Assume that the car was clean and the driver was respectful during the ride.
+				<br>
+				Revised Review
+				<br>
+				<textarea onkeyup="checkLength2()" id="review2" name="review2" placeholder="Revised Review"></textarea>
+				<div id="textLength2">0 characters</div>
+			</div>
+			<br>
+			<input id="submitButton" type="submit" value="Submit" disabled="">
+			<div id="confirmation" hidden="">YOUR RESPONSE WAS SUBMITTED NOW YOU CAN CONTINUE TO THE NEXT STEP</div>
+		</form>
+
+		<script type="text/javascript">
+			$(function() {
+			  $('#rating').barrating({
+			    theme: 'fontawesome-stars'
+			  });
+			});
+		</script>
+
+		<script>
+		  function checkStarChange() {
+		  	var starValue = parseInt($('#rating').val());
+		  	if (starValue < 5) {
+		  		$('#extraOptions').show();
+		  	} else {
+		  		$('#extraOptions').hide();
+		  	}
+		  }
+
+		  function checkReview() {
+		  	return false;
+		  }
+
+		  function verifyText() {
+		  	var isValid = checkReview();
+		  	if (isValid) {
+		  		$('#reviewOk').show();
+		  		$('#submitButton').prop('disabled', false);
+		  	} else {
+		  		$('#verifyButton').prop('hidden', true);
+	  			$('#review1').prop('hidden', true);
+		  		$('#reviewChange').show();
+		  	}
+		  }
+
+		  function checkLength() {
+		  	var reviewLength = $('#review1').val().length;
+		  	$('#textLength').text(reviewLength + ' characters');
+		  	if (reviewLength >= 150) {
+		  		$('#verifyButton').prop('disabled', false);
+		  	} else {
+		  		$('#verifyButton').prop('disabled', true);
+		  	}
+		  }
+
+		  function checkLength2() {
+		  	var reviewLength = $('#review2').val().length;
+		  	$('#textLength2').text(reviewLength + ' characters');
+		  	if (reviewLength >= 150) {
+		  		$('#submitButton').prop('disabled', false);
+		  	} else {
+		  		$('#submitButton').prop('disabled', true);
+		  	}
+		  }
+
+		  const scriptURL = 'https://script.google.com/macros/s/AKfycbzpQ5RgUo8YkP80fnn1zGu6FAGI-sAUz9hKP6Mb6KT3sFemDLKS/exec'
+		  const form = document.forms['submit-to-google-sheet']
+
+		  form.addEventListener('submit', e => {
+		    e.preventDefault()
+		    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+		      .then(response => console.log('Success!', response))
+		      .catch(error => console.error('Error!', error.message))
+		    $('#submitButton').prop('disabled', true);
+	  		$('#confirmation').prop('hidden', false);
+		  })
+
+		  checkStarChange();
+		</script>
+	
+
+</body></html>
