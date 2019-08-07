@@ -2,11 +2,11 @@
 <html>
 	<head>
 		<title>GDPR-2B</title>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/themes/font-awesome.min.css">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/themes/fontawesome-stars.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/themes/bars-pill.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/jquery.barrating.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/jquery.barrating.min.js"></script>
 		<link rel="stylesheet" href="https://hcilab.ml/files/index.css">
 		<style>
 			body {
@@ -27,15 +27,7 @@
 	  		<input name="email" id="email" type="hidden">
 			Please provide feedback to the delivery person
 			<br><br>
-			Was the delivery person professional and courteous?
-	  		<br>
-			Yes <input class="raioBtn" type="radio"> No <input class="raioBtn" type="radio">
-			<br><br>
-			Was your delivery on time?
-	  		<br>
-			Yes <input class="raioBtn" type="radio"> No <input class="raioBtn" type="radio">
-			<br><br>
-			Rate your overall experience
+			How likely are you to recommend this freelancer to a friend or a colleague?
 			<br>
 			<select onchange="checkStarChange()" name="rating" id="rating">
 			  <option value="1" selected>1</option>
@@ -43,8 +35,75 @@
 			  <option value="3">3</option>
 			  <option value="4">4</option>
 			  <option value="5">5</option>
+			  <option value="6">6</option>
+			  <option value="7">7</option>
+			  <option value="8">8</option>
+			  <option value="9">9</option>
+			  <option value="10">10</option>
+			</select>
+			<br><br>
+			Feedback to freelancer
+			<br><br>
+			Availability
+			<br>
+			<select onchange="" name="rating2" id="rating2">
+			  <option value="1" selected>1</option>
+			  <option value="2">2</option>
+			  <option value="3">3</option>
+			  <option value="4">4</option>
+			  <option value="5">5</option>
 			</select>
 			<br>
+			Communication
+			<br>
+			<select onchange="" name="rating2" id="rating2">
+			  <option value="1" selected>1</option>
+			  <option value="2">2</option>
+			  <option value="3">3</option>
+			  <option value="4">4</option>
+			  <option value="5">5</option>
+			</select>
+			<br>
+			Adherence to Schedule
+			<br>
+			<select onchange="" name="rating2" id="rating2">
+			  <option value="1" selected>1</option>
+			  <option value="2">2</option>
+			  <option value="3">3</option>
+			  <option value="4">4</option>
+			  <option value="5">5</option>
+			</select>
+			<br>
+			Skills
+			<br>
+			<select onchange="" name="rating2" id="rating2">
+			  <option value="1" selected>1</option>
+			  <option value="2">2</option>
+			  <option value="3">3</option>
+			  <option value="4">4</option>
+			  <option value="5">5</option>
+			</select>
+			<br>
+			Quality of work
+			<br>
+			<select onchange="" name="rating2" id="rating2">
+			  <option value="1" selected>1</option>
+			  <option value="2">2</option>
+			  <option value="3">3</option>
+			  <option value="4">4</option>
+			  <option value="5">5</option>
+			</select>
+			<br>
+			Cooperation
+			<br>
+			<select onchange="" name="rating2" id="rating2">
+			  <option value="1" selected>1</option>
+			  <option value="2">2</option>
+			  <option value="3">3</option>
+			  <option value="4">4</option>
+			  <option value="5">5</option>
+			</select>
+			<br><br>
 			Review to the driver
 			<br>
 			<textarea onkeyup="checkLength()" id="review1" name="review1" placeholder="Review to the driver"></textarea>
